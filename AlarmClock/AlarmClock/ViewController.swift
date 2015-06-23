@@ -8,12 +8,12 @@
 
 import UIKit
 
-<<<<<<< HEAD
 // this is vincent's comment
-=======
+
 //sparks making a comment
 //here's another one
->>>>>>> ChuckSparks
+//sparks making a comment
+//here's another one
 
 
 class ViewController: UIViewController {
