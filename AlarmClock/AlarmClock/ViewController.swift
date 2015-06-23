@@ -8,7 +8,12 @@
 
 import UIKit
 
+<<<<<<< HEAD
 // this is vincent's comment
+=======
+//sparks making a comment
+//here's another one
+>>>>>>> ChuckSparks
 
 
 class ViewController: UIViewController {
@@ -24,5 +29,7 @@ class ViewController: UIViewController {
     }
 
 
+    
+    
 }
 
