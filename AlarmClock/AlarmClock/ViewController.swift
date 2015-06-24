@@ -8,7 +8,11 @@
 
 import UIKit
 
+<<<<<<< HEAD
 // testing commit to master
+=======
+//sparks making a comment
+>>>>>>> master
 
 
 class ViewController: UIViewController {
@@ -24,5 +28,7 @@ class ViewController: UIViewController {
     }
 
 
+    
+    
 }
 
