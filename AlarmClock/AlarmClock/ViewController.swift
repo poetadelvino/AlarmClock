@@ -18,6 +18,32 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    
+    // text buttons:
+    
+    @IBOutlet weak var wakeUpTime: UITextField!
+    
+    @IBOutlet weak var SnoozeTime: UITextField!
+    
+    @IBOutlet weak var Difficulty: UITextField!
+    
+    // music buttons:
+    
+//    E-note (blue, lower right);
+//    C♯-note (yellow, lower left);
+//    A-note (red, upper right).
+//    E-note (green, upper left, an octave lower than blue);
+    
+    
+    
+    
+    
+    // snooze/off buttons:
+    
+
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
