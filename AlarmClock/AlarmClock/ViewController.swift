@@ -77,10 +77,6 @@ class ViewController: UIViewController {
     
     // snooze/off buttons:
     
-
-
-    
-
     
     func readTextTimeAndStoreAsInts() {
  
@@ -114,7 +110,7 @@ class ViewController: UIViewController {
         readTextTimeAndStoreAsInts()
         //now store wakeup time as a time
         timeToWakeUp.hour = 21
-        timeToWakeUp.minute = 22
+        timeToWakeUp.minute = 38
         timeToWakeUp.second = 0
         timeToWakeUp.day = 1
         timeToWakeUp.month = 1
@@ -129,6 +125,7 @@ class ViewController: UIViewController {
         wakeUpNotification.repeatInterval = NSCalendarUnit.CalendarUnitDay
         
         wakeUpNotification.alertBody = "wakeup!!"
+        wakeUpNotification.soundName = "coin.wav"
         
         UIApplication.sharedApplication().scheduleLocalNotification(wakeUpNotification)
         
