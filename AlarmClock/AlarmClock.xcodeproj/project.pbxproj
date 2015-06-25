@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		941ECD3E1B3B8D94006C8A80 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD3D1B3B8D94006C8A80 /* coin.wav */; };
+		941ECD401B3B8F6C006C8A80 /* CasioPiano.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD3F1B3B8F6C006C8A80 /* CasioPiano.wav */; };
 		94332E631B34FCC100D54092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94332E621B34FCC100D54092 /* AppDelegate.swift */; };
 		94332E661B34FCC100D54092 /* AlarmClock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94332E641B34FCC100D54092 /* AlarmClock.xcdatamodeld */; };
 		94332E681B34FCC100D54092 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94332E671B34FCC100D54092 /* ViewController.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		941ECD3D1B3B8D94006C8A80 /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = coin.wav; path = AlarmClock/Images.xcassets/coin.wav; sourceTree = "<group>"; };
+		941ECD3F1B3B8F6C006C8A80 /* CasioPiano.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CasioPiano.wav; sourceTree = "<group>"; };
 		94332E5D1B34FCC100D54092 /* AlarmClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94332E611B34FCC100D54092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94332E621B34FCC100D54092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +68,8 @@
 				94332E5F1B34FCC100D54092 /* AlarmClock */,
 				94332E781B34FCC100D54092 /* AlarmClockTests */,
 				94332E5E1B34FCC100D54092 /* Products */,
+				941ECD3D1B3B8D94006C8A80 /* coin.wav */,
+				941ECD3F1B3B8F6C006C8A80 /* CasioPiano.wav */,
 			);
 			sourceTree = "<group>";
 		};
@@ -195,7 +201,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				941ECD401B3B8F6C006C8A80 /* CasioPiano.wav in Resources */,
 				94332E6B1B34FCC100D54092 /* Main.storyboard in Resources */,
+				941ECD3E1B3B8D94006C8A80 /* coin.wav in Resources */,
 				94332E701B34FCC100D54092 /* LaunchScreen.xib in Resources */,
 				94332E6D1B34FCC100D54092 /* Images.xcassets in Resources */,
 			);
@@ -415,6 +423,7 @@
 				94332E811B34FCC100D54092 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		94332E821B34FCC100D54092 /* Build configuration list for PBXNativeTarget "AlarmClockTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +432,7 @@
 				94332E841B34FCC100D54092 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
