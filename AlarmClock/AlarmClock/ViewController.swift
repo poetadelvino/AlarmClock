@@ -85,11 +85,9 @@ class ViewController: UIViewController {
     func readTextTimeAndStoreAsInts() {
  
         var wakeUpTimeString: String = wakeUpTime.text
-        
-        println(" here's the wakeup time: \(wakeUpTimeString)")
-        
+
         func textToInts (textTime: String) {
-        
+            
             //var fullName = "First Last"
             var textTimeArray = split(textTime) {$0 == ":"}
             var hourText: String = textTimeArray[0]
@@ -97,12 +95,17 @@ class ViewController: UIViewController {
             
             hourInt = hourText.toInt()!
             minInt = minText!.toInt()!
-            
-            println("\(hourInt) : \(minInt)")
-            
         }  // end textToInts
+        
+        textToInts(wakeUpTimeString)
+        
+        println(" here's the wakeup time in text: \(wakeUpTimeString)")
+        // now see if the transformation worked:
+        println("and here as ints: \(hourInt) : \(minInt)")
+        
 
-    }
+
+    } // readTextTimeAndStoreAsInts
 
     
     override func viewDidLoad() {
@@ -110,8 +113,27 @@ class ViewController: UIViewController {
 
         readTextTimeAndStoreAsInts()
         //now store wakeup time as a time
-        timeToWakeUp.hour = hourInt
-        timeToWakeUp.minute = minInt
+        timeToWakeUp.hour = 21
+        timeToWakeUp.minute = 22
+        timeToWakeUp.second = 0
+        timeToWakeUp.day = 1
+        timeToWakeUp.month = 1
+        timeToWakeUp.year = 1980
+        
+        let wakeUpDate = NSCalendar.currentCalendar().dateFromComponents(timeToWakeUp)
+        
+        let wakeUpNotification = UILocalNotification()
+        
+        wakeUpNotification.fireDate = wakeUpDate
+        
+        wakeUpNotification.repeatInterval = NSCalendarUnit.CalendarUnitDay
+        
+        wakeUpNotification.alertBody = "wakeup!!"
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(wakeUpNotification)
+        
+
+        
         
     }
 
