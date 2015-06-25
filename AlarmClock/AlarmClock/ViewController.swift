@@ -8,20 +8,16 @@
 
 import UIKit
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 // testing commit to master
-=======
 //sparks making a comment
->>>>>>> master
-=======
+
 // this is vincent's comment
 
 //sparks making a comment
 //here's another one
 //sparks making a comment
 //here's another one
->>>>>>> master
 
 
 class ViewController: UIViewController {
