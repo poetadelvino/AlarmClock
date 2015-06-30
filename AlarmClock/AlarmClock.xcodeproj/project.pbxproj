@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		941ECD3E1B3B8D94006C8A80 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD3D1B3B8D94006C8A80 /* coin.wav */; };
 		941ECD401B3B8F6C006C8A80 /* CasioPiano.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD3F1B3B8F6C006C8A80 /* CasioPiano.wav */; };
+		941ECD451B422B93006C8A80 /* PianoA.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD411B422B93006C8A80 /* PianoA.wav */; };
+		941ECD461B422B93006C8A80 /* PianoC#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD421B422B93006C8A80 /* PianoC#.wav */; };
+		941ECD471B422B93006C8A80 /* PianoE.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD431B422B93006C8A80 /* PianoE.wav */; };
+		941ECD481B422B93006C8A80 /* PianoG.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD441B422B93006C8A80 /* PianoG.wav */; };
+		941ECD4A1B422DA7006C8A80 /* playTune.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941ECD491B422DA7006C8A80 /* playTune.swift */; };
 		94332E631B34FCC100D54092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94332E621B34FCC100D54092 /* AppDelegate.swift */; };
 		94332E661B34FCC100D54092 /* AlarmClock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94332E641B34FCC100D54092 /* AlarmClock.xcdatamodeld */; };
 		94332E681B34FCC100D54092 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94332E671B34FCC100D54092 /* ViewController.swift */; };
@@ -31,6 +36,11 @@
 /* Begin PBXFileReference section */
 		941ECD3D1B3B8D94006C8A80 /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = coin.wav; path = AlarmClock/Images.xcassets/coin.wav; sourceTree = "<group>"; };
 		941ECD3F1B3B8F6C006C8A80 /* CasioPiano.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CasioPiano.wav; sourceTree = "<group>"; };
+		941ECD411B422B93006C8A80 /* PianoA.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PianoA.wav; sourceTree = "<group>"; };
+		941ECD421B422B93006C8A80 /* PianoC#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "PianoC#.wav"; sourceTree = "<group>"; };
+		941ECD431B422B93006C8A80 /* PianoE.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PianoE.wav; sourceTree = "<group>"; };
+		941ECD441B422B93006C8A80 /* PianoG.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PianoG.wav; sourceTree = "<group>"; };
+		941ECD491B422DA7006C8A80 /* playTune.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = playTune.swift; sourceTree = "<group>"; };
 		94332E5D1B34FCC100D54092 /* AlarmClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94332E611B34FCC100D54092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94332E621B34FCC100D54092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +80,10 @@
 				94332E5E1B34FCC100D54092 /* Products */,
 				941ECD3D1B3B8D94006C8A80 /* coin.wav */,
 				941ECD3F1B3B8F6C006C8A80 /* CasioPiano.wav */,
+				941ECD411B422B93006C8A80 /* PianoA.wav */,
+				941ECD421B422B93006C8A80 /* PianoC#.wav */,
+				941ECD431B422B93006C8A80 /* PianoE.wav */,
+				941ECD441B422B93006C8A80 /* PianoG.wav */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +105,7 @@
 				94332E6C1B34FCC100D54092 /* Images.xcassets */,
 				94332E6E1B34FCC100D54092 /* LaunchScreen.xib */,
 				94332E641B34FCC100D54092 /* AlarmClock.xcdatamodeld */,
+				941ECD491B422DA7006C8A80 /* playTune.swift */,
 				94332E601B34FCC100D54092 /* Supporting Files */,
 			);
 			path = AlarmClock;
@@ -201,10 +216,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				941ECD451B422B93006C8A80 /* PianoA.wav in Resources */,
 				941ECD401B3B8F6C006C8A80 /* CasioPiano.wav in Resources */,
+				941ECD471B422B93006C8A80 /* PianoE.wav in Resources */,
+				941ECD481B422B93006C8A80 /* PianoG.wav in Resources */,
 				94332E6B1B34FCC100D54092 /* Main.storyboard in Resources */,
 				941ECD3E1B3B8D94006C8A80 /* coin.wav in Resources */,
 				94332E701B34FCC100D54092 /* LaunchScreen.xib in Resources */,
+				941ECD461B422B93006C8A80 /* PianoC#.wav in Resources */,
 				94332E6D1B34FCC100D54092 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,6 +245,7 @@
 				94332E681B34FCC100D54092 /* ViewController.swift in Sources */,
 				94332E661B34FCC100D54092 /* AlarmClock.xcdatamodeld in Sources */,
 				94332E631B34FCC100D54092 /* AppDelegate.swift in Sources */,
+				941ECD4A1B422DA7006C8A80 /* playTune.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

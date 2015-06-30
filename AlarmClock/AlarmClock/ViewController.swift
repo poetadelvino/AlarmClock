@@ -50,32 +50,67 @@ class ViewController: UIViewController {
     
     @IBAction func lowE(sender: UIButton) {
         
-        // here's a code from stack overflow on getting a coin sound:
-        // Grab the path, make sure to add it to your project!
-        var pianoSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("CasioPiano", ofType: "wav")!)
+        // here's a code from stack overflow on getting sound:
+        // Grab the path to the file
+        //, make sure to add it to your project!
+        var gNote = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("PianoG", ofType: "wav")!)
         
         // for testing..
         var error: NSError?
-        
-        audioPlayer = AVAudioPlayer(contentsOfURL: pianoSound, error: &error)
+        audioPlayer = AVAudioPlayer(contentsOfURL: gNote, error: &error)
         //print the result of the file retrieval
         println(error)
         audioPlayer?.prepareToPlay()
-        
         audioPlayer?.play()
     }
     
 //    E-note (blue, lower right);
+    @IBAction func E(sender: UIButton) {
+        var eNote = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("PianoE", ofType: "wav")!)
+        
+        // for testing..
+        var error: NSError?
+        audioPlayer = AVAudioPlayer(contentsOfURL: eNote, error: &error)
+        //print the result of the file retrieval
+        println(error)
+        audioPlayer?.prepareToPlay()
+        audioPlayer?.play()
+    }
     
 //    C♯-note (yellow, lower left);
+    @IBAction func C(sender: UIButton) {
+        var cNote = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("PianoC#", ofType: "wav")!)
+        
+        // for testing..
+        var error: NSError?
+        audioPlayer = AVAudioPlayer(contentsOfURL: cNote, error: &error)
+        //print the result of the file retrieval
+        println(error)
+        audioPlayer?.prepareToPlay()
+        audioPlayer?.play()
+    }
     
 //    A-note (red, upper right).
+    @IBAction func A(sender: UIButton) {
+        var aNote = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("PianoA", ofType: "wav")!)
+        
+        // for testing..
+        var error: NSError?
+        audioPlayer = AVAudioPlayer(contentsOfURL: aNote, error: &error)
+        //print the result of the file retrieval
+        println(error)
+        audioPlayer?.prepareToPlay()
+        audioPlayer?.play()
+    }
 
     //av player
     
     
     
-    // snooze/off buttons:
+    // snooze button:
+    
+    
+    // off button:
     
     
     func readTextTimeAndStoreAsInts() {
@@ -128,9 +163,6 @@ class ViewController: UIViewController {
         wakeUpNotification.soundName = "coin.wav"
         
         UIApplication.sharedApplication().scheduleLocalNotification(wakeUpNotification)
-        
-
-        
         
     }
 
