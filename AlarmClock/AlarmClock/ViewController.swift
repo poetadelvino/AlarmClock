@@ -19,7 +19,13 @@ import AVFoundation
 
 class ViewController: UIViewController {
     
-    // global variables:
+    
+    // global variables for reading user's tune:
+    
+    var userFinishedPlaying = false
+    var tunePlayedByUser = [String]()
+    
+    // global variables for wake up notification:
     
     var hourInt: Int = 0
     var minInt: Int = 0
@@ -36,6 +42,7 @@ class ViewController: UIViewController {
     // wake up time:
     
     
+    
     @IBOutlet weak var wakeUpTime: UITextField!
     
     
@@ -50,6 +57,8 @@ class ViewController: UIViewController {
     
     @IBAction func lowE(sender: UIButton) {
         
+        // First play the note:
+        
         // here's a code from stack overflow on getting sound:
         // Grab the path to the file
         //, make sure to add it to your project!
@@ -62,6 +71,10 @@ class ViewController: UIViewController {
         println(error)
         audioPlayer?.prepareToPlay()
         audioPlayer?.play()
+        
+        //Now add the note played by user to his tune:
+        
+        tunePlayedByUser.append("ul")
     }
     
 //    E-note (blue, lower right);
@@ -75,6 +88,10 @@ class ViewController: UIViewController {
         println(error)
         audioPlayer?.prepareToPlay()
         audioPlayer?.play()
+        
+        //Now add the note played by user to his tune:
+        
+        tunePlayedByUser.append("lr")
     }
     
 //    C♯-note (yellow, lower left);
@@ -88,6 +105,10 @@ class ViewController: UIViewController {
         println(error)
         audioPlayer?.prepareToPlay()
         audioPlayer?.play()
+        
+        //Now add the note played by user to his tune:
+        
+        tunePlayedByUser.append("ll")
     }
     
 //    A-note (red, upper right).
@@ -101,6 +122,10 @@ class ViewController: UIViewController {
         println(error)
         audioPlayer?.prepareToPlay()
         audioPlayer?.play()
+        
+        //Now add the note played by user to his tune:
+        
+        tunePlayedByUser.append("ur")
     }
 
     //av player
@@ -164,6 +189,15 @@ class ViewController: UIViewController {
         
         UIApplication.sharedApplication().scheduleLocalNotification(wakeUpNotification)
         
+
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // test of sound:
+        playTune(["ul","ur","ur","ll","lr"])
     }
 
     override func didReceiveMemoryWarning() {
@@ -171,8 +205,5 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
-    
-    
 }
 

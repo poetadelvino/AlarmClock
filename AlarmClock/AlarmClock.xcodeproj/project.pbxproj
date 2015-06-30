@@ -14,6 +14,7 @@
 		941ECD471B422B93006C8A80 /* PianoE.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD431B422B93006C8A80 /* PianoE.wav */; };
 		941ECD481B422B93006C8A80 /* PianoG.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD441B422B93006C8A80 /* PianoG.wav */; };
 		941ECD4A1B422DA7006C8A80 /* playTune.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941ECD491B422DA7006C8A80 /* playTune.swift */; };
+		941ECD4C1B423BFB006C8A80 /* ListenAndCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941ECD4B1B423BFB006C8A80 /* ListenAndCompare.swift */; };
 		94332E631B34FCC100D54092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94332E621B34FCC100D54092 /* AppDelegate.swift */; };
 		94332E661B34FCC100D54092 /* AlarmClock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94332E641B34FCC100D54092 /* AlarmClock.xcdatamodeld */; };
 		94332E681B34FCC100D54092 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94332E671B34FCC100D54092 /* ViewController.swift */; };
@@ -41,6 +42,7 @@
 		941ECD431B422B93006C8A80 /* PianoE.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PianoE.wav; sourceTree = "<group>"; };
 		941ECD441B422B93006C8A80 /* PianoG.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PianoG.wav; sourceTree = "<group>"; };
 		941ECD491B422DA7006C8A80 /* playTune.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = playTune.swift; sourceTree = "<group>"; };
+		941ECD4B1B423BFB006C8A80 /* ListenAndCompare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListenAndCompare.swift; sourceTree = "<group>"; };
 		94332E5D1B34FCC100D54092 /* AlarmClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94332E611B34FCC100D54092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94332E621B34FCC100D54092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				94332E621B34FCC100D54092 /* AppDelegate.swift */,
 				94332E671B34FCC100D54092 /* ViewController.swift */,
+				941ECD4B1B423BFB006C8A80 /* ListenAndCompare.swift */,
 				94332E691B34FCC100D54092 /* Main.storyboard */,
 				94332E6C1B34FCC100D54092 /* Images.xcassets */,
 				94332E6E1B34FCC100D54092 /* LaunchScreen.xib */,
@@ -242,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				941ECD4C1B423BFB006C8A80 /* ListenAndCompare.swift in Sources */,
 				94332E681B34FCC100D54092 /* ViewController.swift in Sources */,
 				94332E661B34FCC100D54092 /* AlarmClock.xcdatamodeld in Sources */,
 				94332E631B34FCC100D54092 /* AppDelegate.swift in Sources */,
