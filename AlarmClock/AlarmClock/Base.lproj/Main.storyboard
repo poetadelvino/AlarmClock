@@ -20,7 +20,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLN-Rr-Xe3">
                                 <rect key="frame" x="49" y="540" width="52" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="More">
+                                <state key="normal" title="Again">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -123,7 +123,15 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="Off:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WMI-Ih-ho2"/>
+                                </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pV8-sG-ACi">
+                                <rect key="frame" x="114" y="193" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -224,6 +232,7 @@
                     <connections>
                         <outlet property="Difficulty" destination="9Fc-zP-DWi" id="kGI-CB-erh"/>
                         <outlet property="SnoozeTime" destination="6gp-ai-9hj" id="WI9-Nb-biP"/>
+                        <outlet property="UserPlayedWrongTuneText" destination="pV8-sG-ACi" id="zR0-ee-aUd"/>
                         <outlet property="wakeUpTime" destination="A2Q-o9-zgP" id="hgs-ec-Obp"/>
                     </connections>
                 </viewController>

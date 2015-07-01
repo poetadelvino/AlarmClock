@@ -16,6 +16,10 @@ import AVFoundation
 //sparks making a comment
 //here's another one
 
+// Arrays of tunes:
+
+var tuneToCopy = [String]()
+var tunePlayedByUser = [String]()
 
 class ViewController: UIViewController {
     
@@ -23,7 +27,9 @@ class ViewController: UIViewController {
     // global variables for reading user's tune:
     
     var userFinishedPlaying = false
-    var tunePlayedByUser = [String]()
+
+    
+
     
     // global variables for wake up notification:
     
@@ -37,11 +43,8 @@ class ViewController: UIViewController {
     
     var audioPlayer: AVAudioPlayer?
     
-    // text buttons:
     
-    // wake up time:
-    
-    
+    // wake up time buttons:
     
     @IBOutlet weak var wakeUpTime: UITextField!
     
@@ -49,6 +52,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var SnoozeTime: UITextField!
     
     @IBOutlet weak var Difficulty: UITextField!
+    
+    // User played wrong tune text field:
+    
+    
+    @IBOutlet weak var UserPlayedWrongTuneText: UITextField!
+    
     
     // music buttons:
    
@@ -75,7 +84,19 @@ class ViewController: UIViewController {
         //Now add the note played by user to his tune:
         
         tunePlayedByUser.append("ul")
-    }
+        
+        // comparing:
+        println("user played: \(tunePlayedByUser)")
+        println("user must play: \(tuneToCopy)")
+        
+        // test if user is playing tune correctly:
+        if (userPlayedWrongNote() == true) {
+            UserPlayedWrongTuneText.text = "Sorry, wrong note"
+            } else {
+            //do nothing
+        } // end if
+        
+    } // end low E button
     
 //    E-note (blue, lower right);
     @IBAction func E(sender: UIButton) {
@@ -92,6 +113,17 @@ class ViewController: UIViewController {
         //Now add the note played by user to his tune:
         
         tunePlayedByUser.append("lr")
+        
+        println("user played: \(tunePlayedByUser)")
+        println("user must play: \(tuneToCopy)")
+        
+        // test if user is playing tune correctly:
+        if (userPlayedWrongNote() == true) {
+            startAgain()
+
+        } else {
+            //do nothing
+            } // end if
     }
     
 //    C♯-note (yellow, lower left);
@@ -109,7 +141,17 @@ class ViewController: UIViewController {
         //Now add the note played by user to his tune:
         
         tunePlayedByUser.append("ll")
-    }
+        
+        println("user played: \(tunePlayedByUser)")
+        println("user must play: \(tuneToCopy)")
+        
+        // test if user is playing tune correctly:
+        if (userPlayedWrongNote() == true) {
+            UserPlayedWrongTuneText.text = "Sorry, wrong note"
+        } else {
+            //do nothing
+            }
+    } // end func C
     
 //    A-note (red, upper right).
     @IBAction func A(sender: UIButton) {
@@ -126,7 +168,16 @@ class ViewController: UIViewController {
         //Now add the note played by user to his tune:
         
         tunePlayedByUser.append("ur")
-    }
+        println("user played: \(tunePlayedByUser)")
+        println("user must play: \(tuneToCopy)")
+        
+        // test if user is playing tune correctly:
+        if (userPlayedWrongNote() == true) {
+            UserPlayedWrongTuneText.text = "Sorry, wrong note"
+        } else {
+            //do nothing
+            }
+    } // end upperRight
 
     //av player
     
@@ -135,8 +186,15 @@ class ViewController: UIViewController {
     // snooze button:
     
     
-    // off button:
+    // off button (pressed by User when he finished playing the tune:
     
+    @IBAction func Off(sender: UIButton) {
+        
+    userFinishedPlaying = true
+        
+    }
+    
+    // now lets read the time to rise:
     
     func readTextTimeAndStoreAsInts() {
  
@@ -196,8 +254,9 @@ class ViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        // test of sound:
-        playTune(["ul","ur","ur","ll","lr"])
+        // here goes the tune he must copy:
+        tuneToCopy = ["ul","ll","lr"]
+        playTune(tuneToCopy)
     }
 
     override func didReceiveMemoryWarning() {

@@ -103,12 +103,12 @@
 			children = (
 				94332E621B34FCC100D54092 /* AppDelegate.swift */,
 				94332E671B34FCC100D54092 /* ViewController.swift */,
-				941ECD4B1B423BFB006C8A80 /* ListenAndCompare.swift */,
 				94332E691B34FCC100D54092 /* Main.storyboard */,
 				94332E6C1B34FCC100D54092 /* Images.xcassets */,
 				94332E6E1B34FCC100D54092 /* LaunchScreen.xib */,
 				94332E641B34FCC100D54092 /* AlarmClock.xcdatamodeld */,
 				941ECD491B422DA7006C8A80 /* playTune.swift */,
+				941ECD4B1B423BFB006C8A80 /* ListenAndCompare.swift */,
 				94332E601B34FCC100D54092 /* Supporting Files */,
 			);
 			path = AlarmClock;
