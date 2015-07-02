@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		941E99391B44E55800C15FBA /* AlarmAndNotifFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E99381B44E55800C15FBA /* AlarmAndNotifFunctions.swift */; };
 		941ECD3E1B3B8D94006C8A80 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD3D1B3B8D94006C8A80 /* coin.wav */; };
 		941ECD401B3B8F6C006C8A80 /* CasioPiano.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD3F1B3B8F6C006C8A80 /* CasioPiano.wav */; };
 		941ECD451B422B93006C8A80 /* PianoA.wav in Resources */ = {isa = PBXBuildFile; fileRef = 941ECD411B422B93006C8A80 /* PianoA.wav */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		941E99381B44E55800C15FBA /* AlarmAndNotifFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmAndNotifFunctions.swift; sourceTree = "<group>"; };
 		941ECD3D1B3B8D94006C8A80 /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = coin.wav; path = AlarmClock/Images.xcassets/coin.wav; sourceTree = "<group>"; };
 		941ECD3F1B3B8F6C006C8A80 /* CasioPiano.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CasioPiano.wav; sourceTree = "<group>"; };
 		941ECD411B422B93006C8A80 /* PianoA.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PianoA.wav; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				94332E641B34FCC100D54092 /* AlarmClock.xcdatamodeld */,
 				941ECD491B422DA7006C8A80 /* playTune.swift */,
 				941ECD4B1B423BFB006C8A80 /* ListenAndCompare.swift */,
+				941E99381B44E55800C15FBA /* AlarmAndNotifFunctions.swift */,
 				94332E601B34FCC100D54092 /* Supporting Files */,
 			);
 			path = AlarmClock;
@@ -245,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				941E99391B44E55800C15FBA /* AlarmAndNotifFunctions.swift in Sources */,
 				941ECD4C1B423BFB006C8A80 /* ListenAndCompare.swift in Sources */,
 				94332E681B34FCC100D54092 /* ViewController.swift in Sources */,
 				94332E661B34FCC100D54092 /* AlarmClock.xcdatamodeld in Sources */,

@@ -8,6 +8,27 @@
 
 import Foundation
 
+
+func startMusicalTest(){
+    
+    // make a pause (take a deep breath)
+    // the first time, and after going wrong
+    sleep(3)
+    // here goes the tune he must copy:
+    tuneToCopy = ["ur","ll","lr"]
+    
+    // play it if User didn't turn alarm off!:
+    if (alarmIsOn == true) {
+        playTune(tuneToCopy)
+    } // end if
+    
+    // empty the User's tune array:
+
+    tunePlayedByUser = []
+    
+} // end runMusicalTest()
+
+
 func userPlayedWrongNote () -> Bool {
     var nrOfElementsToCompare = tuneToCopy.count
     

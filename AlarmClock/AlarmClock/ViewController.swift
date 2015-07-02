@@ -14,12 +14,17 @@ import AVFoundation
 var tuneToCopy = [String]()
 var tunePlayedByUser = [String]()
 
+var alarmIsOn: Bool = false
+
 class ViewController: UIViewController {
     
     // global variables for reading user's tune:
     
     var userFinishedPlaying = false
-
+    
+    var nrOfTimesUserFailedPlayingTunes = 0
+    var maxTryouts = 3
+    
     // global variables for wake up notification:
     
     var hourInt: Int = 0
@@ -36,6 +41,25 @@ class ViewController: UIViewController {
     // wake up time buttons:
     
     @IBOutlet weak var wakeUpTime: UITextField!
+    
+    @IBAction func alarmOnButton(sender: UIButton) {
+        
+        alarmIsOn = true
+        setAlarmAndNotificationsOn()
+    }
+    
+    
+    @IBAction func alarmOffButton(sender: UIButton) {
+        
+        alarmIsOn = false
+        
+        userFinishedPlaying = true
+        
+        if (tunePlayedByUser == tuneToCopy) {
+            // Congratulate User, and turn off the alarm
+            instructionTextBox.text = "Congrats!!  Alarm has been turned off"
+        }
+    }
     
     
     // User played wrong tune text field:
@@ -54,18 +78,21 @@ class ViewController: UIViewController {
         println("user played: \(tunePlayedByUser)")
         println("user must play: \(tuneToCopy)")
         
-        // test if user is playing tune correctly:
+
         if (userPlayedWrongNote() == true) {
-            instructionTextBox.text = startAgain()
-        } // end if
+        // if user played wrong note, start again:
+            userDidBad()
+        } //if
+        else {
+        // He played the right note so:
+            userDidGood()
+        } //else
     } // end upperLeft button
     
 //    E-note (blue, lower right);
     @IBAction func lowerRight(sender: UIButton) {
+    
         playWavFile("PianoE")
-        // now play the note:
-        audioPlayer?.prepareToPlay()
-        audioPlayer?.play()
         
         //Now add the note played by user to his tune:
         tunePlayedByUser.append("lr")
@@ -74,10 +101,14 @@ class ViewController: UIViewController {
         println("user played: \(tunePlayedByUser)")
         println("user must play: \(tuneToCopy)")
         
-        // test if user is playing tune correctly:
         if (userPlayedWrongNote() == true) {
-            instructionTextBox.text = startAgain()
-        } // end if
+            // if user played wrong note, start again:
+            userDidBad()
+        } //if
+        else {
+            // He played the right note so:
+            userDidGood()
+        } //else
     }  // end func lowerRight()
     
 //    C♯-note (yellow, lower left);
@@ -92,10 +123,14 @@ class ViewController: UIViewController {
         println("user played: \(tunePlayedByUser)")
         println("user must play: \(tuneToCopy)")
         
-        // test if user is playing tune correctly:
         if (userPlayedWrongNote() == true) {
-            instructionTextBox.text = startAgain()
-            } // end if
+            // if user played wrong note, start again:
+            userDidBad()
+        } //if
+        else {
+            // He played the right note so:
+            userDidGood()
+        } //else
     } // end func lowerLeft()
     
 //    A-note (red, upper right).
@@ -107,34 +142,23 @@ class ViewController: UIViewController {
         //Now add the note played by user to his tune:
         
         tunePlayedByUser.append("ur")
+        
         println("user played: \(tunePlayedByUser)")
         println("user must play: \(tuneToCopy)")
         
-        // test if user is playing tune correctly:
         if (userPlayedWrongNote() == true) {
-            instructionTextBox.text = startAgain()
-        } else {
-            instructionTextBox.text = "Go on, you're doing well"
-        }// end if
+            // if user played wrong note, start again:
+            userDidBad()
+        } //if
+        else {
+            // He played the right note so:
+            userDidGood()
+        } //else
     } // end upperRight
 
-    //av player
-    
-    
-    // snooze button:
-    
-    
     // off button (pressed by User when he finished playing the tune:
     
-    @IBAction func Off(sender: UIButton) {
-        userFinishedPlaying = true
-        
-        if (tunePlayedByUser == tuneToCopy) {
-            // Congratulate User, and turn off the alarm
-            instructionTextBox.text = "Congrats!!  Alarm has been turned off"
-            // TODO: turn alarm off!
-            }
-    } // end Off button
+
     
     // now lets read the time to rise:
     
@@ -164,31 +188,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // if user did NOT play tune right, send notification in 10 sec
-        // wakeUpNotification.fireDate = NSDate(timeIntervalSinceNow: 10)
-        //wakeUpNotification.fireDate = NSDate(
+        if (alarmIsOn == true) {
+            startMusicalTest()
+        }
         
-        // to cancel all notifications:  
-        //UIApplication.sharedApplication().cancelAllLocalNotifications()
-        
-//   UIApplication.sharedApplication().presentLocalNotificationNow(wakeUpNotification)
-        
-        // Anounce tune:
-        instructionTextBox.text = "Please listen to the tune"
-        
+        // if Alarm time box is not empty, set alarm and nots ON:
+
+
     } // end viewDidLoad()
     
     override func viewDidAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        // here goes the tune he must copy:
-        tuneToCopy = ["ur","ll","lr"]
-        // play it:
-        playTune(tuneToCopy)
-        
-        // now ask him to play it back:
-        
-        instructionTextBox.text = "Now play it again Sam"
+
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -196,35 +209,73 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setAlarmOn() {
+    func setAlarmAndNotificationsOn() {
         // read Wake up time:
         // hour and minute will be stored in vars: hourInt and minInt
         
-        readTextTimeAndStoreAsInts()
-        //now store wakeup time as a time
-        timeToWakeUp.hour = hourInt
-        timeToWakeUp.minute = minInt
-        timeToWakeUp.second = 0
-        timeToWakeUp.day = 1
-        timeToWakeUp.month = 1
-        timeToWakeUp.year = 1980
+        // first see if alarm time box isn't empty:
+        if (wakeUpTime == "") {
+            instructionTextBox.text = "Please Enter the Wake Up Time and Press Alarm On"
+        } else {
+            
+            readTextTimeAndStoreAsInts()
         
-        let wakeUpDate = NSCalendar.currentCalendar().dateFromComponents(timeToWakeUp)
+            //now store wakeup time as a time
+            timeToWakeUp.hour = hourInt
+            timeToWakeUp.minute = minInt
+            timeToWakeUp.second = 0
+            timeToWakeUp.day = 1
+            timeToWakeUp.month = 1
+            timeToWakeUp.year = 1980
+        
+            let wakeUpDate = NSCalendar.currentCalendar().dateFromComponents(timeToWakeUp)
+            let wakeUpNotification = UILocalNotification()
+        
+            wakeUpNotification.fireDate = wakeUpDate
+            wakeUpNotification.repeatInterval = NSCalendarUnit.CalendarUnitDay
+            wakeUpNotification.alertBody = "wakeup!!"
+            wakeUpNotification.soundName = "coin.wav"
+
+            // now schedule notification:
+            UIApplication.sharedApplication().scheduleLocalNotification(wakeUpNotification)
+        }// else
+
+    } // end setAlarmAndNotification()
+    
+    func createNotificationInTenMinutes() {
         
         let wakeUpNotification = UILocalNotification()
-        
-        wakeUpNotification.fireDate = wakeUpDate
-        
-        wakeUpNotification.repeatInterval = NSCalendarUnit.CalendarUnitDay
-        
         wakeUpNotification.alertBody = "wakeup!!"
         wakeUpNotification.soundName = "coin.wav"
-
-//        UIApplication.sharedApplication().presentLocalNotificationNow(wakeUpNotification)
-        // testing:
-        //wakeUpNotification.fireDate = NSDate(timeIntervalSinceNow: 10)
+        wakeUpNotification.fireDate = NSDate(timeIntervalSinceNow: 600)
         UIApplication.sharedApplication().scheduleLocalNotification(wakeUpNotification)
-
-    } // end createNotification()
+    }
+    
+    func userDidBad() {
+        
+            if (nrOfTimesUserFailedPlayingTunes < 3) {
+                nrOfTimesUserFailedPlayingTunes++
+                instructionTextBox.text = "Wrong note, please try again"
+                startMusicalTest()
+            } else {
+                instructionTextBox.text = "Wrong note.  Sorry, you failed more than \(maxTryouts) times.  Notification will come in ten"
+                createNotificationInTenMinutes()
+                
+            } // end else
+    } // end func userDidBad()
+    
+    func userDidGood() {
+        
+        //if he played the WHOLE tune, congratulate him and turn the alarm and notifications off
+        if (tuneToCopy == tunePlayedByUser) {
+            instructionTextBox.text = "Well done!!! Alarm is off now!!"
+            turnOffAlarmAndNotifications()
+            
+        } else {
+            // if you're here, User has played the right note, but hasn't finished playing ALL the right notes yet.
+            // just cheer him:
+            instructionTextBox.text = "Go on, you're doing well"
+        } // end else
+    } // end userDidGood()
 }
 

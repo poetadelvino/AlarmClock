@@ -24,6 +24,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="alarmOnButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="etv-u1-24x"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRr-xx-HMj">
                                 <rect key="frame" x="49" y="240" width="130" height="130"/>
@@ -94,7 +97,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="Off:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WMI-Ih-ho2"/>
+                                    <action selector="alarmOffButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9e7-2W-UhH"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pV8-sG-ACi">
