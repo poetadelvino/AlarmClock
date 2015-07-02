@@ -9,13 +9,6 @@
 import UIKit
 import AVFoundation
 
-// this is vincent's comment
-
-//sparks making a comment
-//here's another one
-//sparks making a comment
-//here's another one
-
 // Arrays of tunes:
 
 var tuneToCopy = [String]()
@@ -23,14 +16,10 @@ var tunePlayedByUser = [String]()
 
 class ViewController: UIViewController {
     
-    
     // global variables for reading user's tune:
     
     var userFinishedPlaying = false
 
-    
-
-    
     // global variables for wake up notification:
     
     var hourInt: Int = 0
@@ -49,40 +38,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var wakeUpTime: UITextField!
     
     
-    @IBOutlet weak var SnoozeTime: UITextField!
-    
-    @IBOutlet weak var Difficulty: UITextField!
-    
     // User played wrong tune text field:
     
-    
-    @IBOutlet weak var UserPlayedWrongTuneText: UITextField!
-    
+    @IBOutlet weak var instructionTextBox: UITextField!
     
     // music buttons:
    
     //    low E-note (green, upper left, an octave lower than blue);
-    
-    
-    @IBAction func lowE(sender: UIButton) {
-        
-        // First play the note:
-        
-        // here's a code from stack overflow on getting sound:
-        // Grab the path to the file
-        //, make sure to add it to your project!
-        var gNote = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("PianoG", ofType: "wav")!)
-        
-        // for testing..
-        var error: NSError?
-        audioPlayer = AVAudioPlayer(contentsOfURL: gNote, error: &error)
-        //print the result of the file retrieval
-        println(error)
-        audioPlayer?.prepareToPlay()
-        audioPlayer?.play()
-        
-        //Now add the note played by user to his tune:
-        
+    @IBAction func upperLeft(sender: UIButton) {
+        playWavFile("PianoG")
+        //Now add the note to the array that holds the User's tune:
         tunePlayedByUser.append("ul")
         
         // comparing:
@@ -91,79 +56,53 @@ class ViewController: UIViewController {
         
         // test if user is playing tune correctly:
         if (userPlayedWrongNote() == true) {
-            UserPlayedWrongTuneText.text = "Sorry, wrong note"
-            } else {
-            //do nothing
+            instructionTextBox.text = startAgain()
         } // end if
-        
-    } // end low E button
+    } // end upperLeft button
     
 //    E-note (blue, lower right);
-    @IBAction func E(sender: UIButton) {
-        var eNote = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("PianoE", ofType: "wav")!)
-        
-        // for testing..
-        var error: NSError?
-        audioPlayer = AVAudioPlayer(contentsOfURL: eNote, error: &error)
-        //print the result of the file retrieval
-        println(error)
+    @IBAction func lowerRight(sender: UIButton) {
+        playWavFile("PianoE")
+        // now play the note:
         audioPlayer?.prepareToPlay()
         audioPlayer?.play()
         
         //Now add the note played by user to his tune:
-        
         tunePlayedByUser.append("lr")
         
+        //testing:
         println("user played: \(tunePlayedByUser)")
         println("user must play: \(tuneToCopy)")
         
         // test if user is playing tune correctly:
         if (userPlayedWrongNote() == true) {
-            startAgain()
-
-        } else {
-            //do nothing
-            } // end if
-    }
+            instructionTextBox.text = startAgain()
+        } // end if
+    }  // end func lowerRight()
     
 //    C♯-note (yellow, lower left);
-    @IBAction func C(sender: UIButton) {
-        var cNote = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("PianoC#", ofType: "wav")!)
+    @IBAction func lowerLeft(sender: UIButton) {
         
-        // for testing..
-        var error: NSError?
-        audioPlayer = AVAudioPlayer(contentsOfURL: cNote, error: &error)
-        //print the result of the file retrieval
-        println(error)
-        audioPlayer?.prepareToPlay()
-        audioPlayer?.play()
-        
+                playWavFile("PianoC#")
+
         //Now add the note played by user to his tune:
-        
         tunePlayedByUser.append("ll")
-        
+
+        // testing:
         println("user played: \(tunePlayedByUser)")
         println("user must play: \(tuneToCopy)")
         
         // test if user is playing tune correctly:
         if (userPlayedWrongNote() == true) {
-            UserPlayedWrongTuneText.text = "Sorry, wrong note"
-        } else {
-            //do nothing
-            }
-    } // end func C
+            instructionTextBox.text = startAgain()
+            } // end if
+    } // end func lowerLeft()
     
 //    A-note (red, upper right).
-    @IBAction func A(sender: UIButton) {
-        var aNote = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("PianoA", ofType: "wav")!)
+    @IBAction func upperRight(sender: UIButton) {
         
-        // for testing..
-        var error: NSError?
-        audioPlayer = AVAudioPlayer(contentsOfURL: aNote, error: &error)
-        //print the result of the file retrieval
-        println(error)
-        audioPlayer?.prepareToPlay()
-        audioPlayer?.play()
+        // use new function:
+        playWavFile("PianoA")
         
         //Now add the note played by user to his tune:
         
@@ -173,14 +112,13 @@ class ViewController: UIViewController {
         
         // test if user is playing tune correctly:
         if (userPlayedWrongNote() == true) {
-            UserPlayedWrongTuneText.text = "Sorry, wrong note"
+            instructionTextBox.text = startAgain()
         } else {
-            //do nothing
-            }
+            instructionTextBox.text = "Go on, you're doing well"
+        }// end if
     } // end upperRight
 
     //av player
-    
     
     
     // snooze button:
@@ -189,10 +127,14 @@ class ViewController: UIViewController {
     // off button (pressed by User when he finished playing the tune:
     
     @IBAction func Off(sender: UIButton) {
+        userFinishedPlaying = true
         
-    userFinishedPlaying = true
-        
-    }
+        if (tunePlayedByUser == tuneToCopy) {
+            // Congratulate User, and turn off the alarm
+            instructionTextBox.text = "Congrats!!  Alarm has been turned off"
+            // TODO: turn alarm off!
+            }
+    } // end Off button
     
     // now lets read the time to rise:
     
@@ -201,7 +143,6 @@ class ViewController: UIViewController {
         var wakeUpTimeString: String = wakeUpTime.text
 
         func textToInts (textTime: String) {
-            
             //var fullName = "First Last"
             var textTimeArray = split(textTime) {$0 == ":"}
             var hourText: String = textTimeArray[0]
@@ -209,26 +150,60 @@ class ViewController: UIViewController {
             
             hourInt = hourText.toInt()!
             minInt = minText!.toInt()!
-        }  // end textToInts
+            }  // end textToInts
         
         textToInts(wakeUpTimeString)
         
         println(" here's the wakeup time in text: \(wakeUpTimeString)")
         // now see if the transformation worked:
         println("and here as ints: \(hourInt) : \(minInt)")
-        
-
 
     } // readTextTimeAndStoreAsInts
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // if user did NOT play tune right, send notification in 10 sec
+        // wakeUpNotification.fireDate = NSDate(timeIntervalSinceNow: 10)
+        //wakeUpNotification.fireDate = NSDate(
+        
+        // to cancel all notifications:  
+        //UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
+//   UIApplication.sharedApplication().presentLocalNotificationNow(wakeUpNotification)
+        
+        // Anounce tune:
+        instructionTextBox.text = "Please listen to the tune"
+        
+    } // end viewDidLoad()
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // here goes the tune he must copy:
+        tuneToCopy = ["ur","ll","lr"]
+        // play it:
+        playTune(tuneToCopy)
+        
+        // now ask him to play it back:
+        
+        instructionTextBox.text = "Now play it again Sam"
+    }
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func setAlarmOn() {
+        // read Wake up time:
+        // hour and minute will be stored in vars: hourInt and minInt
+        
         readTextTimeAndStoreAsInts()
         //now store wakeup time as a time
-        timeToWakeUp.hour = 21
-        timeToWakeUp.minute = 38
+        timeToWakeUp.hour = hourInt
+        timeToWakeUp.minute = minInt
         timeToWakeUp.second = 0
         timeToWakeUp.day = 1
         timeToWakeUp.month = 1
@@ -244,25 +219,12 @@ class ViewController: UIViewController {
         
         wakeUpNotification.alertBody = "wakeup!!"
         wakeUpNotification.soundName = "coin.wav"
-        
+
+//        UIApplication.sharedApplication().presentLocalNotificationNow(wakeUpNotification)
+        // testing:
+        //wakeUpNotification.fireDate = NSDate(timeIntervalSinceNow: 10)
         UIApplication.sharedApplication().scheduleLocalNotification(wakeUpNotification)
-        
 
-        
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // here goes the tune he must copy:
-        tuneToCopy = ["ul","ll","lr"]
-        playTune(tuneToCopy)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    } // end createNotification()
 }
 

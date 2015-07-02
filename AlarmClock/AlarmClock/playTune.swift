@@ -13,6 +13,36 @@ import AVFoundation
 
 var audioPlayer: AVAudioPlayer?
 
+func playTune (sequence: [String]) {
+    
+    // Anounce:
+
+    // noteNr is the index for the array of notes user must play
+    var noteNr = 0
+    
+    // while there's still a note to be played, continue playing..
+    while (noteNr < sequence.count) {
+        switch (sequence[noteNr]) {
+        case "ul":
+            playUpperLeft()
+        case "ur":
+            playUpperRight()
+        case "ll":
+            playLowerLeft()
+        case "lr":
+            playLowerRight()
+        default:
+            println("note doesnt exist")
+        } // end switch
+        noteNr++
+        
+        // sily method to make some time..
+        for var i=0.0; i < (1000000000/2); i++ {}
+        
+    } // end while loop
+} // end playTune function
+
+// the 4 functions to play the 4 notes:
 func playUpperLeft () {
     var gNote = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("PianoG", ofType: "wav")!)
     
@@ -61,29 +91,18 @@ func playLowerRight () {
     audioPlayer?.play()
 }  // playLowerRight
 
-
-func playTune (sequence: [String]) {
-
+func playWavFile(fileName: String) {
     
-    // index for sequence, the array of key notes
-    var noteNr = 0
-    while (noteNr < sequence.count) {
-        switch (sequence[noteNr]) {
-            case "ul":
-                playUpperLeft()
-            case "ur":
-                playUpperRight()
-            case "ll":
-                playLowerLeft()
-            case "lr":
-                playLowerRight()
-            default:
-                println("note doesnt exist")
-        } // end switch
-        noteNr++
-        // make some time..
-        for var i=0.0; i < 1000000000; i++ {}
-        
-    } // end while loop
-} // end playTune function
+    var noteFile = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(fileName, ofType: "wav")!)
+    
+    // for testing..
+    var error: NSError?
+    audioPlayer = AVAudioPlayer(contentsOfURL: noteFile, error: &error)
+    //print the result of the file retrieval
+    println(error)
+    audioPlayer?.prepareToPlay()
+    audioPlayer?.play()
+
+}
+
 //} // end PlayTuneClass
