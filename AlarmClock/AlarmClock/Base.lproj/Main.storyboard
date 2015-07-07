@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -204,11 +204,6 @@
                                 <exclude reference="YUz-tE-872"/>
                                 <exclude reference="b2v-Ed-t8V"/>
                                 <exclude reference="z3J-zO-szT"/>
-                                <exclude reference="W1p-rh-L2T"/>
-                                <exclude reference="f5H-kE-Y5J"/>
-                                <exclude reference="qBr-up-GKg"/>
-                                <exclude reference="xfH-pe-YNR"/>
-                                <exclude reference="zko-xr-zAa"/>
                                 <exclude reference="8JV-p9-dMQ"/>
                                 <exclude reference="A66-kP-UvG"/>
                                 <exclude reference="QUL-Dl-jB2"/>
@@ -216,6 +211,11 @@
                                 <exclude reference="YjS-SA-iGu"/>
                                 <exclude reference="mUL-L8-098"/>
                                 <exclude reference="soC-tR-bdt"/>
+                                <exclude reference="W1p-rh-L2T"/>
+                                <exclude reference="f5H-kE-Y5J"/>
+                                <exclude reference="qBr-up-GKg"/>
+                                <exclude reference="xfH-pe-YNR"/>
+                                <exclude reference="zko-xr-zAa"/>
                                 <exclude reference="Fz4-QE-JgQ"/>
                                 <exclude reference="fRN-6r-2Ww"/>
                                 <exclude reference="mKb-0u-Iml"/>
