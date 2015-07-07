@@ -53,17 +53,38 @@ class ViewController: UIViewController {
         
         alarmIsOn = false
         
+        // tell user what he's done:
+        instructionTextBox.text = "Turning alarm off, are you sure?"
+        
+
+        
+        // store the alarmIsOn "off" status:
+        NSUserDefaults.standardUserDefaults().setObject(alarmIsOn, forKey: "alarmIsOnBoolean")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+        // clear alarm time:
+        wakeUpTime.text = ""
+        
+        // store alarm time as "" (empty)
+        NSUserDefaults.standardUserDefaults().setObject(wakeUpTime.text, forKey: "timeAsUserDefault")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+        
+        // ?
         userFinishedPlaying = true
         
+        // if tune was played the right tune:
         if (tunePlayedByUser == tuneToCopy) {
-            // Congratulate User, and turn off the alarm
+            
+            // Congratulate User:
             instructionTextBox.text = "Congrats!!  Alarm has been turned off"
-        }
-    }
-    
+        } else {
+            // send another notification to start in 10 min:
+            createNotificationInTenMinutes()
+        } // end else
+    } // alarmOffButton
     
     // User played wrong tune text field:
-    
     @IBOutlet weak var instructionTextBox: UITextField!
     
     // music buttons:
@@ -90,8 +111,8 @@ class ViewController: UIViewController {
     } // end testIfRightNote etc..
     
     @IBAction func upperLeft(sender: UIButton) {
-        playWavFile("PianoG")
         
+        playWavFile("PianoG")
         testIfRightNoteAndAddToUserTune("ul")
 
     } // end upperLeft button
@@ -100,7 +121,6 @@ class ViewController: UIViewController {
     @IBAction func lowerRight(sender: UIButton) {
     
         playWavFile("PianoE")
-        
         testIfRightNoteAndAddToUserTune("lr")
         
     }  // end func lowerRight()
@@ -109,7 +129,6 @@ class ViewController: UIViewController {
     @IBAction func lowerLeft(sender: UIButton) {
         
         playWavFile("PianoC#")
-
         testIfRightNoteAndAddToUserTune("ll")
         
     } // end func lowerLeft()
@@ -118,8 +137,8 @@ class ViewController: UIViewController {
     @IBAction func upperRight(sender: UIButton) {
         
         playWavFile("PianoA")
-        
         testIfRightNoteAndAddToUserTune("ur")
+        
     } // end upperRight
 
     
@@ -153,42 +172,46 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (alarmIsOn == true) {
-            instructionTextBox.text = "Time to wake up!! Listen to tune and repeat"
-            startMusicalTest()
-        }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterBackground", name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterForeground", name: UIApplicationWillEnterForegroundNotification, object: nil)
+        
+        didEnterForeground()
+        
     } // end viewDidLoad()
     
-    override func viewWillDisappear(animated: Bool) {
+    func didEnterBackground () {
         // store wake-up time in chip:
-        super.viewWillDisappear(animated)
+
+        println("im in didEnterBackground")
         NSUserDefaults.standardUserDefaults().setObject(wakeUpTime.text, forKey: "timeAsUserDefault")
         NSUserDefaults.standardUserDefaults().synchronize()
         
         // store alarm on-off switch status
-        super.viewWillDisappear(animated)
         NSUserDefaults.standardUserDefaults().setObject(alarmIsOn, forKey: "alarmIsOnBoolean")
         NSUserDefaults.standardUserDefaults().synchronize()
-        
     }
-    override func viewWillAppear(animated: Bool) {
-        
+
+    func didEnterForeground(){
+        // TODO: check with Pat
         // restore wake-up time from chip to display:
         if let time = NSUserDefaults.standardUserDefaults().objectForKey("timeAsUserDefault") as? String {
             wakeUpTime.text = time
-            
+        }  // end iflet
         //  restore alarm on-off switch:
-            if let alarmSwitch = NSUserDefaults.standardUserDefaults().objectForKey("alarmIsOnBoolean") as? Bool {
-                alarmIsOn = alarmSwitch
-            
-            
+        if let alarmSwitch = NSUserDefaults.standardUserDefaults().objectForKey("alarmIsOnBoolean") as? Bool {
+            alarmIsOn = alarmSwitch
         }
-    
-    }
-    override func viewDidAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
+        
+        // test if value for alarm was saved and restored:
+        if (alarmIsOn == true) {
+            println(" alarm is on, time hear the tune and play it")
+            instructionTextBox.text = "Time to wake up!! Listen to tune and repeat"
+            startMusicalTest()
+        } else {
+            println("alarm is off")
+        }
+    } // didEnterForeground(...
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -240,10 +263,17 @@ class ViewController: UIViewController {
         
             if (nrOfTimesUserFailedPlayingTunes < 3) {
                 nrOfTimesUserFailedPlayingTunes++
-                instructionTextBox.text = "Wrong note, please try again"
+                instructionTextBox.text = "Wrong note, listen and try again"
+                
+                // give user some time:
+                sleep(3)
+                
+                // now ask user to play the tune again:
+                instructionTextBox.text = "Now try again:"
                 startMusicalTest()
+                
             } else {
-                instructionTextBox.text = "Wrong note.  Sorry, you failed more than \(maxTryouts) times.  Notification will come in ten"
+                instructionTextBox.text = "Missed \(maxTryouts) times, try in 10min"
                 createNotificationInTenMinutes()
                 
             } // end else
