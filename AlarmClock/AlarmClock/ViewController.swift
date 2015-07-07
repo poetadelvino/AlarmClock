@@ -56,8 +56,6 @@ class ViewController: UIViewController {
         // tell user what he's done:
         instructionTextBox.text = "Turning alarm off, are you sure?"
         
-
-        
         // store the alarmIsOn "off" status:
         NSUserDefaults.standardUserDefaults().setObject(alarmIsOn, forKey: "alarmIsOnBoolean")
         NSUserDefaults.standardUserDefaults().synchronize()
@@ -84,36 +82,19 @@ class ViewController: UIViewController {
         } // end else
     } // alarmOffButton
     
-    // User played wrong tune text field:
+    // Dialog box with user:
     @IBOutlet weak var instructionTextBox: UITextField!
     
     // music buttons:
    
     //    low E-note (green, upper left, an octave lower than blue);
     
-    func testIfRightNoteAndAddToUserTune( key: String) {
-        if (alarmIsOn == true) {
 
-            if (userPlayedWrongNote() == true)  {
-                // if user played wrong note, start again:
-                TellUserHeDidBad()
-            } //if
-            else {
-                // He played the right note so:
-                TellUserHeDidWell()
-                //Add the note the user played to the array that holds the User's tune:
-                tunePlayedByUser.append("ul")
-            } //end else
-            // test: comparing:
-            println("user played: \(tunePlayedByUser)")
-            println("user must play: \(tuneToCopy)")
-        } // end if alarm is on
-    } // end testIfRightNote etc..
     
     @IBAction func upperLeft(sender: UIButton) {
         
         playWavFile("PianoG")
-        testIfRightNoteAndAddToUserTune("ul")
+        if alarmIsOn { testIfRightNoteAndAddToUserTune("ul") }
 
     } // end upperLeft button
     
@@ -121,7 +102,7 @@ class ViewController: UIViewController {
     @IBAction func lowerRight(sender: UIButton) {
     
         playWavFile("PianoE")
-        testIfRightNoteAndAddToUserTune("lr")
+        if alarmIsOn {testIfRightNoteAndAddToUserTune("lr")}
         
     }  // end func lowerRight()
     
@@ -129,7 +110,7 @@ class ViewController: UIViewController {
     @IBAction func lowerLeft(sender: UIButton) {
         
         playWavFile("PianoC#")
-        testIfRightNoteAndAddToUserTune("ll")
+        if alarmIsOn { testIfRightNoteAndAddToUserTune("ll")}
         
     } // end func lowerLeft()
     
@@ -137,7 +118,7 @@ class ViewController: UIViewController {
     @IBAction func upperRight(sender: UIButton) {
         
         playWavFile("PianoA")
-        testIfRightNoteAndAddToUserTune("ur")
+        if alarmIsOn { testIfRightNoteAndAddToUserTune("ur")}
         
     } // end upperRight
 
@@ -202,7 +183,7 @@ class ViewController: UIViewController {
         if let alarmSwitch = NSUserDefaults.standardUserDefaults().objectForKey("alarmIsOnBoolean") as? Bool {
             alarmIsOn = alarmSwitch
         }
-        
+
         // test if value for alarm was saved and restored:
         if (alarmIsOn == true) {
             println(" alarm is on, time hear the tune and play it")
@@ -259,10 +240,44 @@ class ViewController: UIViewController {
         UIApplication.sharedApplication().scheduleLocalNotification(wakeUpNotification)
     }
     
+    func testIfRightNoteAndAddToUserTune( key: String) {
+        
+        if (seeIfUserPlayedWrongNote() == true)  {
+            
+            nrOfTimesUserFailedPlayingTunes++
+            
+            if (nrOfTimesUserFailedPlayingTunes > 5) {
+
+                // user played tune wrong, too many times.
+                instructionTextBox.text = "Missed \(maxTryouts) times, try in 10min"
+                createNotificationInTenMinutes()
+            } else {
+                // user played wrong note, give him another chance to play the whole tune.  Tell user and start again:
+                TellUserHeDidBad()
+                startAgain()
+                startMusicalTest()
+                }
+        } //if wrong note
+            
+            // user played the RIGHT note:
+        else {
+            // He played the right note so:
+            if alarmIsOn {
+                TellUserHeDidWell()
+                //Add the note the user played to the array that holds the User's tune:
+                tunePlayedByUser.append(key)            }
+        } //end else
+        
+        // test: comparing true tune vs user's tune:
+        println("user played: \(tunePlayedByUser)")
+        println("user must play: \(tuneToCopy)")
+        
+    } // end testIfRightNote etc..
+    
     func TellUserHeDidBad() {
         
-            if (nrOfTimesUserFailedPlayingTunes < 3) {
-                nrOfTimesUserFailedPlayingTunes++
+            if (nrOfTimesUserFailedPlayingTunes < 5) {
+
                 instructionTextBox.text = "Wrong note, listen and try again"
                 
                 // give user some time:
@@ -270,19 +285,15 @@ class ViewController: UIViewController {
                 
                 // now ask user to play the tune again:
                 instructionTextBox.text = "Now try again:"
+                startAgain()
                 startMusicalTest()
                 
-            } else {
-                instructionTextBox.text = "Missed \(maxTryouts) times, try in 10min"
-                createNotificationInTenMinutes()
-                
-            } // end else
+            }
     } // end func userDidBad()
     
     func TellUserHeDidWell() {
-        
-        if (alarmIsOn == true) {
-            //if he played the WHOLE tune, congratulate him and turn the alarm and notifications off
+
+            //if he played the WHOLE tune, he succeeded.  Congratulate him and turn the alarm OFF.
             if (tuneToCopy == tunePlayedByUser) {
                 instructionTextBox.text = "Well done!!! Alarm is off now!!"
                 turnOffAlarmAndNotifications()
@@ -292,10 +303,6 @@ class ViewController: UIViewController {
                 // just cheer him:
                 instructionTextBox.text = "Go on, you're doing well"
             } // end else
-            
-        } // end if alarmIsOn
-        
-
     } // end TellUserHeDidWell()
 }
 

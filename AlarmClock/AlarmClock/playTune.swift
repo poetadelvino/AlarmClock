@@ -36,8 +36,7 @@ func playTune (sequence: [String]) {
         } // end switch
         noteNr++
         
-        // sily method to make some time..
-        for var i=0.0; i < (1000000000/2); i++ {}
+        sleep(1)
         
     } // end while loop
 } // end playTune function
@@ -104,5 +103,3 @@ func playWavFile(fileName: String) {
     audioPlayer?.play()
 
 }
-
-//} // end PlayTuneClass
